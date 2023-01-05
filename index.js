@@ -11,11 +11,32 @@ function add(taskName) {
 }
 
 /**
+  * タスクと完了したかどうかが含まれるオブジェクトを受け取り、完了したかを返す
+  * @param {object} task
+  * @return {boolean} 完了したかどうか
+  */
+function isDone(task) {
+  return task.isDone;
+}
+
+/**
+ * タスクと完了したかどうかが含まれるオブジェクトを受け取り、完了していないかを返す
+ * @param {object} task
+ * @return {boolean} 完了していないかどうか
+ */
+function isNotDone(task) {
+  return !isDone(task);
+}
+
+
+/**
  * タスクの一覧の配列を取得する
  * @return {array}
  */
 function list() {
-  return tasks.filter((task) => !task.isDone).map((task) => task.name);
+  return tasks
+    .filter(isNotDone)
+    .map((task) => task.name);
 }
 
 /**
@@ -34,7 +55,7 @@ function done(taskName) {
  * @return {array}
  */
 function donelist() {
-  return tasks.filter((task) => task.isDone).map((task) => task.name);
+  return tasks.filter(isDone).map((task) => task.name);
 }
 
 /**
